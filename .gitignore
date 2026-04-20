@@ -1,0 +1,15 @@
+# .NET 编译产物
+bin/
+obj/
+*.exe
+*.dll
+*.pdb
+*.user
+
+# Rider & VS 缓存
+.idea/
+
+# Mac 系统垃圾
+.DS_Store
+
+# 配置文件（如果你有敏感信息，建议忽略）
