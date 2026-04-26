@@ -7,11 +7,18 @@
         <Nullable>enable</Nullable>
         <PublishAot>true</PublishAot>
         <InvariantGlobalization>false</InvariantGlobalization>
+        <JsonSerializerIsReflectionEnabledByDefault>true</JsonSerializerIsReflectionEnabledByDefault>
     </PropertyGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\SteelForce.Core\SteelForce.Core.csproj" />
+      <ProjectReference Include="..\SteelForce.Infrastructure\SteelForce.Infrastructure.csproj" />
       <ProjectReference Include="..\SteelForce.Services\SteelForce.Services.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Xbim.Essentials" Version="6.0.587" />
+      <PackageReference Include="Xbim.IDS.Validator.Common" Version="1.0.187" />
     </ItemGroup>
 
 </Project>

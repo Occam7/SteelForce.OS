@@ -4,6 +4,17 @@
       <ProjectReference Include="..\SteelForce.Core\SteelForce.Core.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="Data\SteelLibrary.json" />
+      <Content Include="Data\SteelLibrary.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Data\MaterialLibrary.json" />
+      <Content Include="Data\MaterialLibrary.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>

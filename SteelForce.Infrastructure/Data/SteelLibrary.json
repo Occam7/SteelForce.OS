@@ -1,0 +1,2192 @@
+[
+  {
+    "Category": "HW",
+    "Name": "H100x100",
+    "IsStandard": true,
+    "H": 100,
+    "B": 100,
+    "t1": 6,
+    "t2": 8,
+    "Ix": 3780000
+  },
+  {
+    "Category": "HW",
+    "Name": "H125x125",
+    "IsStandard": true,
+    "H": 125,
+    "B": 125,
+    "t1": 6.5,
+    "t2": 9,
+    "Ix": 8390000
+  },
+  {
+    "Category": "HW",
+    "Name": "H150x150",
+    "IsStandard": true,
+    "H": 150,
+    "B": 150,
+    "t1": 7,
+    "t2": 10,
+    "Ix": 16200000
+  },
+  {
+    "Category": "HW",
+    "Name": "H175x175",
+    "IsStandard": true,
+    "H": 175,
+    "B": 175,
+    "t1": 7.5,
+    "t2": 11,
+    "Ix": 29000000
+  },
+  {
+    "Category": "HW",
+    "Name": "H200x200",
+    "IsStandard": true,
+    "H": 200,
+    "B": 200,
+    "t1": 8,
+    "t2": 12,
+    "Ix": 47200000
+  },
+  {
+    "Category": "HW",
+    "Name": "*H200x204",
+    "IsStandard": false,
+    "H": 200,
+    "B": 204,
+    "t1": 12,
+    "t2": 12,
+    "Ix": 49800000
+  },
+  {
+    "Category": "HW",
+    "Name": "*H244x252",
+    "IsStandard": false,
+    "H": 244,
+    "B": 252,
+    "t1": 11,
+    "t2": 11,
+    "Ix": 87000000
+  },
+  {
+    "Category": "HW",
+    "Name": "H250x250",
+    "IsStandard": true,
+    "H": 250,
+    "B": 250,
+    "t1": 9,
+    "t2": 14,
+    "Ix": 107000000
+  },
+  {
+    "Category": "HW",
+    "Name": "H250x255",
+    "IsStandard": true,
+    "H": 250,
+    "B": 255,
+    "t1": 14,
+    "t2": 14,
+    "Ix": 114000000
+  },
+  {
+    "Category": "HW",
+    "Name": "H294x302",
+    "IsStandard": true,
+    "H": 294,
+    "B": 302,
+    "t1": 12,
+    "t2": 12,
+    "Ix": 166000000
+  },
+  {
+    "Category": "HW",
+    "Name": "H300x300",
+    "IsStandard": true,
+    "H": 300,
+    "B": 300,
+    "t1": 10,
+    "t2": 15,
+    "Ix": 202000000
+  },
+  {
+    "Category": "HW",
+    "Name": "*H300x305",
+    "IsStandard": false,
+    "H": 300,
+    "B": 305,
+    "t1": 15,
+    "t2": 15,
+    "Ix": 213000000
+  },
+  {
+    "Category": "HW",
+    "Name": "H338x351",
+    "IsStandard": true,
+    "H": 338,
+    "B": 351,
+    "t1": 13,
+    "t2": 13,
+    "Ix": 277000000
+  },
+  {
+    "Category": "HW",
+    "Name": "*H344x348",
+    "IsStandard": false,
+    "H": 344,
+    "B": 348,
+    "t1": 10,
+    "t2": 16,
+    "Ix": 328000000
+  },
+  {
+    "Category": "HW",
+    "Name": "*H344x354",
+    "IsStandard": false,
+    "H": 344,
+    "B": 354,
+    "t1": 16,
+    "t2": 16,
+    "Ix": 349000000
+  },
+  {
+    "Category": "HW",
+    "Name": "H350x350",
+    "IsStandard": true,
+    "H": 350,
+    "B": 350,
+    "t1": 12,
+    "t2": 19,
+    "Ix": 398000000
+  },
+  {
+    "Category": "HW",
+    "Name": "*H350x357",
+    "IsStandard": false,
+    "H": 350,
+    "B": 357,
+    "t1": 19,
+    "t2": 19,
+    "Ix": 423000000
+  },
+  {
+    "Category": "HW",
+    "Name": "*H388x402",
+    "IsStandard": false,
+    "H": 388,
+    "B": 402,
+    "t1": 15,
+    "t2": 15,
+    "Ix": 490000000
+  },
+  {
+    "Category": "HW",
+    "Name": "H394x398",
+    "IsStandard": true,
+    "H": 394,
+    "B": 398,
+    "t1": 11,
+    "t2": 18,
+    "Ix": 561000000
+  },
+  {
+    "Category": "HW",
+    "Name": "H394x405",
+    "IsStandard": true,
+    "H": 394,
+    "B": 405,
+    "t1": 18,
+    "t2": 18,
+    "Ix": 597000000
+  },
+  {
+    "Category": "HW",
+    "Name": "H400x400",
+    "IsStandard": true,
+    "H": 400,
+    "B": 400,
+    "t1": 13,
+    "t2": 21,
+    "Ix": 666000000
+  },
+  {
+    "Category": "HW",
+    "Name": "*H400x408",
+    "IsStandard": false,
+    "H": 400,
+    "B": 408,
+    "t1": 21,
+    "t2": 21,
+    "Ix": 709000000
+  },
+  {
+    "Category": "HW",
+    "Name": "*H414x405",
+    "IsStandard": false,
+    "H": 414,
+    "B": 405,
+    "t1": 18,
+    "t2": 28,
+    "Ix": 928000000
+  },
+  {
+    "Category": "HW",
+    "Name": "*H428x407",
+    "IsStandard": false,
+    "H": 428,
+    "B": 407,
+    "t1": 20,
+    "t2": 35,
+    "Ix": 1190000000
+  },
+  {
+    "Category": "HW",
+    "Name": "*H458x417",
+    "IsStandard": false,
+    "H": 458,
+    "B": 417,
+    "t1": 30,
+    "t2": 50,
+    "Ix": 1870000000
+  },
+  {
+    "Category": "HW",
+    "Name": "*H498x432",
+    "IsStandard": false,
+    "H": 498,
+    "B": 432,
+    "t1": 45,
+    "t2": 70,
+    "Ix": 2980000000
+  },
+  {
+    "Category": "HW",
+    "Name": "*H492x465",
+    "IsStandard": false,
+    "H": 492,
+    "B": 465,
+    "t1": 15,
+    "t2": 20,
+    "Ix": 1170000000
+  },
+  {
+    "Category": "HW",
+    "Name": "*H502x465",
+    "IsStandard": false,
+    "H": 502,
+    "B": 465,
+    "t1": 15,
+    "t2": 25,
+    "Ix": 1460000000
+  },
+  {
+    "Category": "HW",
+    "Name": "*H502x470",
+    "IsStandard": false,
+    "H": 502,
+    "B": 470,
+    "t1": 20,
+    "t2": 25,
+    "Ix": 1510000000
+  },
+  {
+    "Category": "HM",
+    "Name": "H148x100",
+    "IsStandard": true,
+    "H": 148,
+    "B": 100,
+    "t1": 6,
+    "t2": 9,
+    "Ix": 10000000
+  },
+  {
+    "Category": "HM",
+    "Name": "H194x150",
+    "IsStandard": true,
+    "H": 194,
+    "B": 150,
+    "t1": 6,
+    "t2": 9,
+    "Ix": 26300000
+  },
+  {
+    "Category": "HM",
+    "Name": "H244x175",
+    "IsStandard": true,
+    "H": 244,
+    "B": 175,
+    "t1": 7,
+    "t2": 11,
+    "Ix": 60400000
+  },
+  {
+    "Category": "HM",
+    "Name": "H294x200",
+    "IsStandard": true,
+    "H": 294,
+    "B": 200,
+    "t1": 8,
+    "t2": 12,
+    "Ix": 111000000
+  },
+  {
+    "Category": "HM",
+    "Name": "*H298x201",
+    "IsStandard": false,
+    "H": 298,
+    "B": 201,
+    "t1": 9,
+    "t2": 14,
+    "Ix": 131000000
+  },
+  {
+    "Category": "HM",
+    "Name": "H340x250",
+    "IsStandard": true,
+    "H": 340,
+    "B": 250,
+    "t1": 9,
+    "t2": 14,
+    "Ix": 212000000
+  },
+  {
+    "Category": "HM",
+    "Name": "H390x300",
+    "IsStandard": true,
+    "H": 390,
+    "B": 300,
+    "t1": 10,
+    "t2": 16,
+    "Ix": 379000000
+  },
+  {
+    "Category": "HM",
+    "Name": "H440x300",
+    "IsStandard": true,
+    "H": 440,
+    "B": 300,
+    "t1": 11,
+    "t2": 18,
+    "Ix": 547000000
+  },
+  {
+    "Category": "HM",
+    "Name": "*H482x300",
+    "IsStandard": false,
+    "H": 482,
+    "B": 300,
+    "t1": 11,
+    "t2": 15,
+    "Ix": 583000000
+  },
+  {
+    "Category": "HM",
+    "Name": "H488x300",
+    "IsStandard": true,
+    "H": 488,
+    "B": 300,
+    "t1": 11,
+    "t2": 18,
+    "Ix": 689000000
+  },
+  {
+    "Category": "HM",
+    "Name": "H544x300",
+    "IsStandard": true,
+    "H": 544,
+    "B": 300,
+    "t1": 11,
+    "t2": 15,
+    "Ix": 764000000
+  },
+  {
+    "Category": "HM",
+    "Name": "*H550x300",
+    "IsStandard": false,
+    "H": 550,
+    "B": 300,
+    "t1": 11,
+    "t2": 18,
+    "Ix": 898000000
+  },
+  {
+    "Category": "HM",
+    "Name": "*H582x300",
+    "IsStandard": false,
+    "H": 582,
+    "B": 300,
+    "t1": 12,
+    "t2": 17,
+    "Ix": 989000000
+  },
+  {
+    "Category": "HM",
+    "Name": "H588x300",
+    "IsStandard": true,
+    "H": 588,
+    "B": 300,
+    "t1": 12,
+    "t2": 20,
+    "Ix": 1140000000
+  },
+  {
+    "Category": "HM",
+    "Name": "H594x302",
+    "IsStandard": true,
+    "H": 594,
+    "B": 302,
+    "t1": 14,
+    "t2": 23,
+    "Ix": 1340000000
+  },
+  {
+    "Category": "HN",
+    "Name": "*H100x50",
+    "IsStandard": false,
+    "H": 100,
+    "B": 50,
+    "t1": 5,
+    "t2": 7,
+    "Ix": 1870000
+  },
+  {
+    "Category": "HN",
+    "Name": "H125x60",
+    "IsStandard": true,
+    "H": 125,
+    "B": 60,
+    "t1": 6,
+    "t2": 8,
+    "Ix": 4090000
+  },
+  {
+    "Category": "HN",
+    "Name": "H150x75",
+    "IsStandard": true,
+    "H": 150,
+    "B": 75,
+    "t1": 5,
+    "t2": 7,
+    "Ix": 6660000
+  },
+  {
+    "Category": "HN",
+    "Name": "H175x90",
+    "IsStandard": true,
+    "H": 175,
+    "B": 90,
+    "t1": 5,
+    "t2": 8,
+    "Ix": 12100000
+  },
+  {
+    "Category": "HN",
+    "Name": "*H198x99",
+    "IsStandard": false,
+    "H": 198,
+    "B": 99,
+    "t1": 4.5,
+    "t2": 7,
+    "Ix": 15400000
+  },
+  {
+    "Category": "HN",
+    "Name": "H200x100",
+    "IsStandard": true,
+    "H": 200,
+    "B": 100,
+    "t1": 5.5,
+    "t2": 8,
+    "Ix": 18100000
+  },
+  {
+    "Category": "HN",
+    "Name": "H248x124",
+    "IsStandard": true,
+    "H": 248,
+    "B": 124,
+    "t1": 5,
+    "t2": 8,
+    "Ix": 34500000
+  },
+  {
+    "Category": "HN",
+    "Name": "H250x125",
+    "IsStandard": true,
+    "H": 250,
+    "B": 125,
+    "t1": 6,
+    "t2": 9,
+    "Ix": 39600000
+  },
+  {
+    "Category": "HN",
+    "Name": "*H298x149",
+    "IsStandard": false,
+    "H": 298,
+    "B": 149,
+    "t1": 5.5,
+    "t2": 8,
+    "Ix": 63200000
+  },
+  {
+    "Category": "HN",
+    "Name": "H300x150",
+    "IsStandard": true,
+    "H": 300,
+    "B": 150,
+    "t1": 6.5,
+    "t2": 9,
+    "Ix": 72100000
+  },
+  {
+    "Category": "HN",
+    "Name": "H346x174",
+    "IsStandard": true,
+    "H": 346,
+    "B": 174,
+    "t1": 6,
+    "t2": 9,
+    "Ix": 110000000
+  },
+  {
+    "Category": "HN",
+    "Name": "H350x175",
+    "IsStandard": true,
+    "H": 350,
+    "B": 175,
+    "t1": 7,
+    "t2": 11,
+    "Ix": 135000000
+  },
+  {
+    "Category": "HN",
+    "Name": "H400x150",
+    "IsStandard": true,
+    "H": 400,
+    "B": 150,
+    "t1": 8,
+    "t2": 13,
+    "Ix": 186000000
+  },
+  {
+    "Category": "HN",
+    "Name": "*H396x199",
+    "IsStandard": false,
+    "H": 396,
+    "B": 199,
+    "t1": 7,
+    "t2": 11,
+    "Ix": 198000000
+  },
+  {
+    "Category": "HN",
+    "Name": "H400x200",
+    "IsStandard": true,
+    "H": 400,
+    "B": 200,
+    "t1": 8,
+    "t2": 13,
+    "Ix": 235000000
+  },
+  {
+    "Category": "HN",
+    "Name": "*H446x150",
+    "IsStandard": false,
+    "H": 446,
+    "B": 150,
+    "t1": 7,
+    "t2": 12,
+    "Ix": 220000000
+  },
+  {
+    "Category": "HN",
+    "Name": "H450x151",
+    "IsStandard": true,
+    "H": 450,
+    "B": 151,
+    "t1": 8,
+    "t2": 14,
+    "Ix": 257000000
+  },
+  {
+    "Category": "HN",
+    "Name": "H446x199",
+    "IsStandard": true,
+    "H": 446,
+    "B": 199,
+    "t1": 8,
+    "t2": 12,
+    "Ix": 281000000
+  },
+  {
+    "Category": "HN",
+    "Name": "H450x200",
+    "IsStandard": true,
+    "H": 450,
+    "B": 200,
+    "t1": 9,
+    "t2": 14,
+    "Ix": 329000000
+  },
+  {
+    "Category": "HN",
+    "Name": "*H470x150",
+    "IsStandard": false,
+    "H": 470,
+    "B": 150,
+    "t1": 7,
+    "t2": 13,
+    "Ix": 262000000
+  },
+  {
+    "Category": "HN",
+    "Name": "*H475x151.5",
+    "IsStandard": false,
+    "H": 475,
+    "B": 151.5,
+    "t1": 8.5,
+    "t2": 15.5,
+    "Ix": 317000000
+  },
+  {
+    "Category": "HN",
+    "Name": "H482x153.5",
+    "IsStandard": true,
+    "H": 482,
+    "B": 153.5,
+    "t1": 10.5,
+    "t2": 19,
+    "Ix": 396000000
+  },
+  {
+    "Category": "HN",
+    "Name": "*H492x150",
+    "IsStandard": false,
+    "H": 492,
+    "B": 150,
+    "t1": 7,
+    "t2": 12,
+    "Ix": 275000000
+  },
+  {
+    "Category": "HN",
+    "Name": "H500x152",
+    "IsStandard": true,
+    "H": 500,
+    "B": 152,
+    "t1": 9,
+    "t2": 16,
+    "Ix": 370000000
+  },
+  {
+    "Category": "HN",
+    "Name": "H504x153",
+    "IsStandard": true,
+    "H": 504,
+    "B": 153,
+    "t1": 10,
+    "t2": 18,
+    "Ix": 419000000
+  },
+  {
+    "Category": "HN",
+    "Name": "*H496x199",
+    "IsStandard": false,
+    "H": 496,
+    "B": 199,
+    "t1": 9,
+    "t2": 14,
+    "Ix": 408000000
+  },
+  {
+    "Category": "HN",
+    "Name": "H500x200",
+    "IsStandard": true,
+    "H": 500,
+    "B": 200,
+    "t1": 10,
+    "t2": 16,
+    "Ix": 468000000
+  },
+  {
+    "Category": "HN",
+    "Name": "H506x201",
+    "IsStandard": true,
+    "H": 506,
+    "B": 201,
+    "t1": 11,
+    "t2": 19,
+    "Ix": 555000000
+  },
+  {
+    "Category": "HN",
+    "Name": "*H546x199",
+    "IsStandard": false,
+    "H": 546,
+    "B": 199,
+    "t1": 9,
+    "t2": 14,
+    "Ix": 508000000
+  },
+  {
+    "Category": "HN",
+    "Name": "H550x200",
+    "IsStandard": true,
+    "H": 550,
+    "B": 200,
+    "t1": 10,
+    "t2": 16,
+    "Ix": 582000000
+  },
+  {
+    "Category": "HN",
+    "Name": "H596x199",
+    "IsStandard": true,
+    "H": 596,
+    "B": 199,
+    "t1": 10,
+    "t2": 15,
+    "Ix": 666000000
+  },
+  {
+    "Category": "HN",
+    "Name": "H600x200",
+    "IsStandard": true,
+    "H": 600,
+    "B": 200,
+    "t1": 11,
+    "t2": 17,
+    "Ix": 756000000
+  },
+  {
+    "Category": "HN",
+    "Name": "*H606x201",
+    "IsStandard": false,
+    "H": 606,
+    "B": 201,
+    "t1": 12,
+    "t2": 20,
+    "Ix": 883000000
+  },
+  {
+    "Category": "HN",
+    "Name": "*H625x198.5",
+    "IsStandard": false,
+    "H": 625,
+    "B": 198.5,
+    "t1": 11.5,
+    "t2": 17.5,
+    "Ix": 850000000
+  },
+  {
+    "Category": "HN",
+    "Name": "H630x200",
+    "IsStandard": true,
+    "H": 630,
+    "B": 200,
+    "t1": 13,
+    "t2": 20,
+    "Ix": 979000000
+  },
+  {
+    "Category": "HN",
+    "Name": "*H638x202",
+    "IsStandard": false,
+    "H": 638,
+    "B": 202,
+    "t1": 15,
+    "t2": 24,
+    "Ix": 1180000000
+  },
+  {
+    "Category": "HN",
+    "Name": "*H646x299",
+    "IsStandard": false,
+    "H": 646,
+    "B": 299,
+    "t1": 10,
+    "t2": 15,
+    "Ix": 1100000000
+  },
+  {
+    "Category": "HN",
+    "Name": "*H650x300",
+    "IsStandard": false,
+    "H": 650,
+    "B": 300,
+    "t1": 11,
+    "t2": 17,
+    "Ix": 1250000000
+  },
+  {
+    "Category": "HN",
+    "Name": "*H656x301",
+    "IsStandard": false,
+    "H": 656,
+    "B": 301,
+    "t1": 12,
+    "t2": 20,
+    "Ix": 1470000000
+  },
+  {
+    "Category": "HN",
+    "Name": "*H692x300",
+    "IsStandard": false,
+    "H": 692,
+    "B": 300,
+    "t1": 13,
+    "t2": 20,
+    "Ix": 1680000000
+  },
+  {
+    "Category": "HN",
+    "Name": "H700x300",
+    "IsStandard": true,
+    "H": 700,
+    "B": 300,
+    "t1": 13,
+    "t2": 24,
+    "Ix": 1970000000
+  },
+  {
+    "Category": "HN",
+    "Name": "*H734x299",
+    "IsStandard": false,
+    "H": 734,
+    "B": 299,
+    "t1": 12,
+    "t2": 16,
+    "Ix": 1610000000
+  },
+  {
+    "Category": "HN",
+    "Name": "*H742x300",
+    "IsStandard": false,
+    "H": 742,
+    "B": 300,
+    "t1": 13,
+    "t2": 20,
+    "Ix": 1970000000
+  },
+  {
+    "Category": "HN",
+    "Name": "*H750x300",
+    "IsStandard": false,
+    "H": 750,
+    "B": 300,
+    "t1": 13,
+    "t2": 24,
+    "Ix": 2310000000
+  },
+  {
+    "Category": "HN",
+    "Name": "*H758x303",
+    "IsStandard": false,
+    "H": 758,
+    "B": 303,
+    "t1": 16,
+    "t2": 28,
+    "Ix": 2760000000
+  },
+  {
+    "Category": "HN",
+    "Name": "*H792x300",
+    "IsStandard": false,
+    "H": 792,
+    "B": 300,
+    "t1": 14,
+    "t2": 22,
+    "Ix": 2480000000
+  },
+  {
+    "Category": "HN",
+    "Name": "H800x300",
+    "IsStandard": true,
+    "H": 800,
+    "B": 300,
+    "t1": 14,
+    "t2": 26,
+    "Ix": 2860000000
+  },
+  {
+    "Category": "HN",
+    "Name": "*H834x298",
+    "IsStandard": false,
+    "H": 834,
+    "B": 298,
+    "t1": 14,
+    "t2": 19,
+    "Ix": 2510000000
+  },
+  {
+    "Category": "HN",
+    "Name": "*H842x299",
+    "IsStandard": false,
+    "H": 842,
+    "B": 299,
+    "t1": 15,
+    "t2": 23,
+    "Ix": 2980000000
+  },
+  {
+    "Category": "HN",
+    "Name": "*H850x300",
+    "IsStandard": false,
+    "H": 850,
+    "B": 300,
+    "t1": 16,
+    "t2": 27,
+    "Ix": 3460000000
+  },
+  {
+    "Category": "HN",
+    "Name": "H858x301",
+    "IsStandard": true,
+    "H": 858,
+    "B": 301,
+    "t1": 17,
+    "t2": 31,
+    "Ix": 3950000000
+  },
+  {
+    "Category": "HN",
+    "Name": "*H890x299",
+    "IsStandard": false,
+    "H": 890,
+    "B": 299,
+    "t1": 15,
+    "t2": 23,
+    "Ix": 3390000000
+  },
+  {
+    "Category": "HN",
+    "Name": "H900x300",
+    "IsStandard": true,
+    "H": 900,
+    "B": 300,
+    "t1": 16,
+    "t2": 28,
+    "Ix": 4040000000
+  },
+  {
+    "Category": "HN",
+    "Name": "*H912x302",
+    "IsStandard": false,
+    "H": 912,
+    "B": 302,
+    "t1": 18,
+    "t2": 34,
+    "Ix": 4910000000
+  },
+  {
+    "Category": "HN",
+    "Name": "*H970x297",
+    "IsStandard": false,
+    "H": 970,
+    "B": 297,
+    "t1": 16,
+    "t2": 21,
+    "Ix": 3930000000
+  },
+  {
+    "Category": "HN",
+    "Name": "H980x298",
+    "IsStandard": true,
+    "H": 980,
+    "B": 298,
+    "t1": 17,
+    "t2": 26,
+    "Ix": 4720000000
+  },
+  {
+    "Category": "HN",
+    "Name": "*H990x298",
+    "IsStandard": false,
+    "H": 990,
+    "B": 298,
+    "t1": 17,
+    "t2": 31,
+    "Ix": 5440000000
+  },
+  {
+    "Category": "HN",
+    "Name": "H1000x300",
+    "IsStandard": true,
+    "H": 1000,
+    "B": 300,
+    "t1": 19,
+    "t2": 36,
+    "Ix": 6340000000
+  },
+  {
+    "Category": "HN",
+    "Name": "*H1008x302",
+    "IsStandard": false,
+    "H": 1008,
+    "B": 302,
+    "t1": 21,
+    "t2": 40,
+    "Ix": 7120000000
+  },
+  {
+    "Category": "HT",
+    "Name": "H95x48",
+    "IsStandard": true,
+    "H": 95,
+    "B": 48,
+    "t1": 3.2,
+    "t2": 4.5,
+    "Ix": 1150000
+  },
+  {
+    "Category": "HT",
+    "Name": "H97x49",
+    "IsStandard": true,
+    "H": 97,
+    "B": 49,
+    "t1": 4,
+    "t2": 5.5,
+    "Ix": 1430000
+  },
+  {
+    "Category": "HT",
+    "Name": "H96x99",
+    "IsStandard": true,
+    "H": 96,
+    "B": 99,
+    "t1": 4.5,
+    "t2": 6,
+    "Ix": 2720000
+  },
+  {
+    "Category": "HT",
+    "Name": "H118x58",
+    "IsStandard": true,
+    "H": 118,
+    "B": 58,
+    "t1": 3.2,
+    "t2": 4.5,
+    "Ix": 2180000
+  },
+  {
+    "Category": "HT",
+    "Name": "H120x59",
+    "IsStandard": true,
+    "H": 120,
+    "B": 59,
+    "t1": 4,
+    "t2": 5.5,
+    "Ix": 2710000
+  },
+  {
+    "Category": "HT",
+    "Name": "H119x123",
+    "IsStandard": true,
+    "H": 119,
+    "B": 123,
+    "t1": 4.5,
+    "t2": 6,
+    "Ix": 5320000
+  },
+  {
+    "Category": "HT",
+    "Name": "H145x73",
+    "IsStandard": true,
+    "H": 145,
+    "B": 73,
+    "t1": 3.2,
+    "t2": 4.5,
+    "Ix": 4160000
+  },
+  {
+    "Category": "HT",
+    "Name": "H147x74",
+    "IsStandard": true,
+    "H": 147,
+    "B": 74,
+    "t1": 4,
+    "t2": 5.5,
+    "Ix": 5160000
+  },
+  {
+    "Category": "HT",
+    "Name": "H139x97",
+    "IsStandard": true,
+    "H": 139,
+    "B": 97,
+    "t1": 3.2,
+    "t2": 4.5,
+    "Ix": 4760000
+  },
+  {
+    "Category": "HT",
+    "Name": "H142x99",
+    "IsStandard": true,
+    "H": 142,
+    "B": 99,
+    "t1": 4.5,
+    "t2": 6,
+    "Ix": 6540000
+  },
+  {
+    "Category": "HT",
+    "Name": "H144x148",
+    "IsStandard": true,
+    "H": 144,
+    "B": 148,
+    "t1": 5,
+    "t2": 7,
+    "Ix": 10900000
+  },
+  {
+    "Category": "HT",
+    "Name": "H147x149",
+    "IsStandard": true,
+    "H": 147,
+    "B": 149,
+    "t1": 6,
+    "t2": 8.5,
+    "Ix": 13500000
+  },
+  {
+    "Category": "HT",
+    "Name": "H168x88",
+    "IsStandard": true,
+    "H": 168,
+    "B": 88,
+    "t1": 3.2,
+    "t2": 4.5,
+    "Ix": 6700000
+  },
+  {
+    "Category": "HT",
+    "Name": "H171x89",
+    "IsStandard": true,
+    "H": 171,
+    "B": 89,
+    "t1": 4,
+    "t2": 6,
+    "Ix": 8940000
+  },
+  {
+    "Category": "HT",
+    "Name": "H167x173",
+    "IsStandard": true,
+    "H": 167,
+    "B": 173,
+    "t1": 5,
+    "t2": 7,
+    "Ix": 17800000
+  },
+  {
+    "Category": "HT",
+    "Name": "H172x175",
+    "IsStandard": true,
+    "H": 172,
+    "B": 175,
+    "t1": 6.5,
+    "t2": 9.5,
+    "Ix": 24700000
+  },
+  {
+    "Category": "HT",
+    "Name": "H193x98",
+    "IsStandard": true,
+    "H": 193,
+    "B": 98,
+    "t1": 3.2,
+    "t2": 4.5,
+    "Ix": 9940000
+  },
+  {
+    "Category": "HT",
+    "Name": "H196x99",
+    "IsStandard": true,
+    "H": 196,
+    "B": 99,
+    "t1": 4,
+    "t2": 6,
+    "Ix": 13200000
+  },
+  {
+    "Category": "HT",
+    "Name": "H188x149",
+    "IsStandard": true,
+    "H": 188,
+    "B": 149,
+    "t1": 4.5,
+    "t2": 6,
+    "Ix": 17300000
+  },
+  {
+    "Category": "HT",
+    "Name": "H192x198",
+    "IsStandard": true,
+    "H": 192,
+    "B": 198,
+    "t1": 6,
+    "t2": 8,
+    "Ix": 30600000
+  },
+  {
+    "Category": "HT",
+    "Name": "H244x124",
+    "IsStandard": true,
+    "H": 244,
+    "B": 124,
+    "t1": 4.5,
+    "t2": 6,
+    "Ix": 26500000
+  },
+  {
+    "Category": "HT",
+    "Name": "H238x173",
+    "IsStandard": true,
+    "H": 238,
+    "B": 173,
+    "t1": 4.5,
+    "t2": 8,
+    "Ix": 42400000
+  },
+  {
+    "Category": "HT",
+    "Name": "H294x148",
+    "IsStandard": true,
+    "H": 294,
+    "B": 148,
+    "t1": 4.5,
+    "t2": 6,
+    "Ix": 48000000
+  },
+  {
+    "Category": "HT",
+    "Name": "H286x198",
+    "IsStandard": true,
+    "H": 286,
+    "B": 198,
+    "t1": 6,
+    "t2": 8,
+    "Ix": 73600000
+  },
+  {
+    "Category": "HT",
+    "Name": "H340x173",
+    "IsStandard": true,
+    "H": 340,
+    "B": 173,
+    "t1": 4.5,
+    "t2": 6,
+    "Ix": 74900000
+  },
+  {
+    "Category": "HT",
+    "Name": "H390x148",
+    "IsStandard": true,
+    "H": 390,
+    "B": 148,
+    "t1": 6,
+    "t2": 8,
+    "Ix": 117000000
+  },
+  {
+    "Category": "HT",
+    "Name": "H390x198",
+    "IsStandard": true,
+    "H": 390,
+    "B": 198,
+    "t1": 6,
+    "t2": 8,
+    "Ix": 147000000
+  },
+  {
+    "Category": "HP",
+    "Name": "HP200x200",
+    "IsStandard": true,
+    "H": 200,
+    "B": 200,
+    "t1": 8,
+    "t2": 12,
+    "Ix": 47200000
+  },
+  {
+    "Category": "HP",
+    "Name": "HP250x250",
+    "IsStandard": true,
+    "H": 250,
+    "B": 250,
+    "t1": 9,
+    "t2": 14,
+    "Ix": 107000000
+  },
+  {
+    "Category": "HP",
+    "Name": "HP300x300",
+    "IsStandard": true,
+    "H": 300,
+    "B": 300,
+    "t1": 10,
+    "t2": 15,
+    "Ix": 202000000
+  },
+  {
+    "Category": "HP",
+    "Name": "HP344x348",
+    "IsStandard": true,
+    "H": 344,
+    "B": 348,
+    "t1": 10,
+    "t2": 16,
+    "Ix": 328000000
+  },
+  {
+    "Category": "HP",
+    "Name": "HP350x350",
+    "IsStandard": true,
+    "H": 350,
+    "B": 350,
+    "t1": 12,
+    "t2": 19,
+    "Ix": 398000000
+  },
+  {
+    "Category": "HP",
+    "Name": "HP400x400",
+    "IsStandard": true,
+    "H": 400,
+    "B": 400,
+    "t1": 13,
+    "t2": 21,
+    "Ix": 666000000
+  },
+  {
+    "Category": "HP",
+    "Name": "*HP400x408",
+    "IsStandard": false,
+    "H": 400,
+    "B": 408,
+    "t1": 21,
+    "t2": 21,
+    "Ix": 709000000
+  },
+  {
+    "Category": "HP",
+    "Name": "HP414x405",
+    "IsStandard": true,
+    "H": 414,
+    "B": 405,
+    "t1": 18,
+    "t2": 28,
+    "Ix": 928000000
+  },
+  {
+    "Category": "HP",
+    "Name": "HP428x407",
+    "IsStandard": true,
+    "H": 428,
+    "B": 407,
+    "t1": 20,
+    "t2": 35,
+    "Ix": 1190000000
+  },
+  {
+    "Category": "HP",
+    "Name": "HP458x417",
+    "IsStandard": true,
+    "H": 458,
+    "B": 417,
+    "t1": 30,
+    "t2": 50,
+    "Ix": 1870000000
+  },
+  {
+    "Category": "HP",
+    "Name": "HP498x432",
+    "IsStandard": true,
+    "H": 498,
+    "B": 432,
+    "t1": 45,
+    "t2": 70,
+    "Ix": 2980000000
+  },
+  {
+    "Category": "TW",
+    "Name": "T50x100",
+    "IsStandard": true,
+    "H": 50,
+    "B": 100,
+    "t1": 6,
+    "t2": 8,
+    "Ix": 161000
+  },
+  {
+    "Category": "TW",
+    "Name": "T62.5x125",
+    "IsStandard": true,
+    "H": 62.5,
+    "B": 125,
+    "t1": 6.5,
+    "t2": 9,
+    "Ix": 1470000
+  },
+  {
+    "Category": "TW",
+    "Name": "T75x150",
+    "IsStandard": true,
+    "H": 75,
+    "B": 150,
+    "t1": 7,
+    "t2": 10,
+    "Ix": 664000
+  },
+  {
+    "Category": "TW",
+    "Name": "T87.5x175",
+    "IsStandard": true,
+    "H": 87.5,
+    "B": 175,
+    "t1": 7.5,
+    "t2": 11,
+    "Ix": 1150000
+  },
+  {
+    "Category": "TW",
+    "Name": "T100x200",
+    "IsStandard": true,
+    "H": 100,
+    "B": 200,
+    "t1": 8,
+    "t2": 12,
+    "Ix": 8010000
+  },
+  {
+    "Category": "TW",
+    "Name": "T100x204",
+    "IsStandard": true,
+    "H": 100,
+    "B": 204,
+    "t1": 12,
+    "t2": 12,
+    "Ix": 1840000
+  },
+  {
+    "Category": "TW",
+    "Name": "T125x250",
+    "IsStandard": true,
+    "H": 125,
+    "B": 250,
+    "t1": 9,
+    "t2": 14,
+    "Ix": 4120000
+  },
+  {
+    "Category": "TW",
+    "Name": "T125x255",
+    "IsStandard": true,
+    "H": 125,
+    "B": 255,
+    "t1": 14,
+    "t2": 14,
+    "Ix": 19400000
+  },
+  {
+    "Category": "TW",
+    "Name": "T147x302",
+    "IsStandard": true,
+    "H": 147,
+    "B": 302,
+    "t1": 12,
+    "t2": 12,
+    "Ix": 8570000
+  },
+  {
+    "Category": "TW",
+    "Name": "T150x300",
+    "IsStandard": true,
+    "H": 150,
+    "B": 300,
+    "t1": 10,
+    "t2": 15,
+    "Ix": 7980000
+  },
+  {
+    "Category": "TW",
+    "Name": "T150x305",
+    "IsStandard": true,
+    "H": 150,
+    "B": 305,
+    "t1": 15,
+    "t2": 15,
+    "Ix": 11100000
+  },
+  {
+    "Category": "TW",
+    "Name": "T172x348",
+    "IsStandard": true,
+    "H": 172,
+    "B": 348,
+    "t1": 10,
+    "t2": 16,
+    "Ix": 12300000
+  },
+  {
+    "Category": "TW",
+    "Name": "T175x350",
+    "IsStandard": true,
+    "H": 175,
+    "B": 350,
+    "t1": 12,
+    "t2": 19,
+    "Ix": 56200000
+  },
+  {
+    "Category": "TW",
+    "Name": "T194x402",
+    "IsStandard": true,
+    "H": 194,
+    "B": 402,
+    "t1": 15,
+    "t2": 15,
+    "Ix": 81300000
+  },
+  {
+    "Category": "TW",
+    "Name": "T197x398",
+    "IsStandard": true,
+    "H": 197,
+    "B": 398,
+    "t1": 11,
+    "t2": 18,
+    "Ix": 94600000
+  },
+  {
+    "Category": "TW",
+    "Name": "T200x400",
+    "IsStandard": true,
+    "H": 200,
+    "B": 400,
+    "t1": 13,
+    "t2": 21,
+    "Ix": 24800000
+  },
+  {
+    "Category": "TW",
+    "Name": "T200x408",
+    "IsStandard": true,
+    "H": 200,
+    "B": 408,
+    "t1": 21,
+    "t2": 21,
+    "Ix": 119000000
+  },
+  {
+    "Category": "TW",
+    "Name": "T207x405",
+    "IsStandard": true,
+    "H": 207,
+    "B": 405,
+    "t1": 18,
+    "t2": 28,
+    "Ix": 155000000
+  },
+  {
+    "Category": "TW",
+    "Name": "T214x407",
+    "IsStandard": true,
+    "H": 214,
+    "B": 407,
+    "t1": 20,
+    "t2": 35,
+    "Ix": 43800000
+  },
+  {
+    "Category": "TM",
+    "Name": "T74x100",
+    "IsStandard": true,
+    "H": 74,
+    "B": 100,
+    "t1": 6,
+    "t2": 9,
+    "Ix": 517000
+  },
+  {
+    "Category": "TM",
+    "Name": "T97x150",
+    "IsStandard": true,
+    "H": 97,
+    "B": 150,
+    "t1": 6,
+    "t2": 9,
+    "Ix": 1240000
+  },
+  {
+    "Category": "TM",
+    "Name": "T122x175",
+    "IsStandard": true,
+    "H": 122,
+    "B": 175,
+    "t1": 7,
+    "t2": 11,
+    "Ix": 2880000
+  },
+  {
+    "Category": "TM",
+    "Name": "T147x200",
+    "IsStandard": true,
+    "H": 147,
+    "B": 200,
+    "t1": 8,
+    "t2": 12,
+    "Ix": 8010000
+  },
+  {
+    "Category": "TM",
+    "Name": "T149x201",
+    "IsStandard": true,
+    "H": 149,
+    "B": 201,
+    "t1": 9,
+    "t2": 14,
+    "Ix": 5710000
+  },
+  {
+    "Category": "TM",
+    "Name": "T170x250",
+    "IsStandard": true,
+    "H": 170,
+    "B": 250,
+    "t1": 9,
+    "t2": 14,
+    "Ix": 10200000
+  },
+  {
+    "Category": "TM",
+    "Name": "T195x300",
+    "IsStandard": true,
+    "H": 195,
+    "B": 300,
+    "t1": 10,
+    "t2": 16,
+    "Ix": 36000000
+  },
+  {
+    "Category": "TM",
+    "Name": "T220x300",
+    "IsStandard": true,
+    "H": 220,
+    "B": 300,
+    "t1": 11,
+    "t2": 18,
+    "Ix": 26800000
+  },
+  {
+    "Category": "TM",
+    "Name": "T241x300",
+    "IsStandard": true,
+    "H": 241,
+    "B": 300,
+    "t1": 11,
+    "t2": 15,
+    "Ix": 33800000
+  },
+  {
+    "Category": "TM",
+    "Name": "T244x300",
+    "IsStandard": true,
+    "H": 244,
+    "B": 300,
+    "t1": 11,
+    "t2": 18,
+    "Ix": 36100000
+  },
+  {
+    "Category": "TM",
+    "Name": "T272x300",
+    "IsStandard": true,
+    "H": 272,
+    "B": 300,
+    "t1": 11,
+    "t2": 15,
+    "Ix": 33800000
+  },
+  {
+    "Category": "TM",
+    "Name": "T275x300",
+    "IsStandard": true,
+    "H": 275,
+    "B": 300,
+    "t1": 11,
+    "t2": 18,
+    "Ix": 40500000
+  },
+  {
+    "Category": "TM",
+    "Name": "T291x300",
+    "IsStandard": true,
+    "H": 291,
+    "B": 300,
+    "t1": 12,
+    "t2": 17,
+    "Ix": 63200000
+  },
+  {
+    "Category": "TM",
+    "Name": "T294x300",
+    "IsStandard": true,
+    "H": 294,
+    "B": 300,
+    "t1": 12,
+    "t2": 20,
+    "Ix": 66800000
+  },
+  {
+    "Category": "TM",
+    "Name": "T297x302",
+    "IsStandard": true,
+    "H": 297,
+    "B": 302,
+    "t1": 14,
+    "t2": 23,
+    "Ix": 52900000
+  },
+  {
+    "Category": "TN",
+    "Name": "T50x50",
+    "IsStandard": true,
+    "H": 50,
+    "B": 50,
+    "t1": 5,
+    "t2": 7,
+    "Ix": 118000
+  },
+  {
+    "Category": "TN",
+    "Name": "T62.5x60",
+    "IsStandard": true,
+    "H": 62.5,
+    "B": 60,
+    "t1": 6,
+    "t2": 8,
+    "Ix": 275000
+  },
+  {
+    "Category": "TN",
+    "Name": "T75x75",
+    "IsStandard": true,
+    "H": 75,
+    "B": 75,
+    "t1": 5,
+    "t2": 7,
+    "Ix": 247000
+  },
+  {
+    "Category": "TN",
+    "Name": "T85.5x89",
+    "IsStandard": true,
+    "H": 85.5,
+    "B": 89,
+    "t1": 6,
+    "t2": 8,
+    "Ix": 353000
+  },
+  {
+    "Category": "TN",
+    "Name": "T87.5x90",
+    "IsStandard": true,
+    "H": 87.5,
+    "B": 90,
+    "t1": 8,
+    "t2": 8,
+    "Ix": 537000
+  },
+  {
+    "Category": "TN",
+    "Name": "T99x99",
+    "IsStandard": true,
+    "H": 99,
+    "B": 99,
+    "t1": 4.5,
+    "t2": 7,
+    "Ix": 935000
+  },
+  {
+    "Category": "TN",
+    "Name": "T100x100",
+    "IsStandard": true,
+    "H": 100,
+    "B": 100,
+    "t1": 5.5,
+    "t2": 8,
+    "Ix": 1140000
+  },
+  {
+    "Category": "TN",
+    "Name": "T124x124",
+    "IsStandard": true,
+    "H": 124,
+    "B": 124,
+    "t1": 5,
+    "t2": 8,
+    "Ix": 2070000
+  },
+  {
+    "Category": "TN",
+    "Name": "T125x125",
+    "IsStandard": true,
+    "H": 125,
+    "B": 125,
+    "t1": 6,
+    "t2": 9,
+    "Ix": 2480000
+  },
+  {
+    "Category": "TN",
+    "Name": "T149x150",
+    "IsStandard": true,
+    "H": 149,
+    "B": 150,
+    "t1": 5.5,
+    "t2": 8,
+    "Ix": 3930000
+  },
+  {
+    "Category": "TN",
+    "Name": "T150x150",
+    "IsStandard": true,
+    "H": 150,
+    "B": 150,
+    "t1": 6.5,
+    "t2": 9,
+    "Ix": 4640000
+  },
+  {
+    "Category": "TN",
+    "Name": "T173x174",
+    "IsStandard": true,
+    "H": 173,
+    "B": 174,
+    "t1": 6,
+    "t2": 9,
+    "Ix": 6790000
+  },
+  {
+    "Category": "TN",
+    "Name": "T175x175",
+    "IsStandard": true,
+    "H": 175,
+    "B": 175,
+    "t1": 7,
+    "t2": 11,
+    "Ix": 8140000
+  },
+  {
+    "Category": "TN",
+    "Name": "T198x199",
+    "IsStandard": true,
+    "H": 198,
+    "B": 199,
+    "t1": 7,
+    "t2": 11,
+    "Ix": 11900000
+  },
+  {
+    "Category": "TN",
+    "Name": "T200x200",
+    "IsStandard": true,
+    "H": 200,
+    "B": 200,
+    "t1": 8,
+    "t2": 13,
+    "Ix": 13900000
+  },
+  {
+    "Category": "TN",
+    "Name": "T223x150",
+    "IsStandard": true,
+    "H": 223,
+    "B": 150,
+    "t1": 7,
+    "t2": 12,
+    "Ix": 3380000
+  },
+  {
+    "Category": "TN",
+    "Name": "T223x199",
+    "IsStandard": true,
+    "H": 223,
+    "B": 199,
+    "t1": 8,
+    "t2": 12,
+    "Ix": 18700000
+  },
+  {
+    "Category": "TN",
+    "Name": "T235x150",
+    "IsStandard": true,
+    "H": 235,
+    "B": 150,
+    "t1": 7,
+    "t2": 13,
+    "Ix": 18500000
+  },
+  {
+    "Category": "TN",
+    "Name": "T237.5x151.5",
+    "IsStandard": true,
+    "H": 237.5,
+    "B": 151.5,
+    "t1": 8.5,
+    "t2": 15.5,
+    "Ix": 22700000
+  },
+  {
+    "Category": "TN",
+    "Name": "T241x153.5",
+    "IsStandard": true,
+    "H": 241,
+    "B": 153.5,
+    "t1": 10.5,
+    "t2": 19,
+    "Ix": 28600000
+  },
+  {
+    "Category": "TN",
+    "Name": "T246x150",
+    "IsStandard": true,
+    "H": 246,
+    "B": 150,
+    "t1": 7,
+    "t2": 12,
+    "Ix": 20600000
+  },
+  {
+    "Category": "TN",
+    "Name": "T250x152",
+    "IsStandard": true,
+    "H": 250,
+    "B": 152,
+    "t1": 9,
+    "t2": 16,
+    "Ix": 27500000
+  },
+  {
+    "Category": "TN",
+    "Name": "T252x153",
+    "IsStandard": true,
+    "H": 252,
+    "B": 153,
+    "t1": 10,
+    "t2": 18,
+    "Ix": 31000000
+  },
+  {
+    "Category": "TN",
+    "Name": "T248x199",
+    "IsStandard": true,
+    "H": 248,
+    "B": 199,
+    "t1": 9,
+    "t2": 14,
+    "Ix": 28200000
+  },
+  {
+    "Category": "TN",
+    "Name": "T250x200",
+    "IsStandard": true,
+    "H": 250,
+    "B": 200,
+    "t1": 10,
+    "t2": 16,
+    "Ix": 32000000
+  },
+  {
+    "Category": "TN",
+    "Name": "T253x201",
+    "IsStandard": true,
+    "H": 253,
+    "B": 201,
+    "t1": 11,
+    "t2": 19,
+    "Ix": 36600000
+  },
+  {
+    "Category": "TN",
+    "Name": "T273x199",
+    "IsStandard": true,
+    "H": 273,
+    "B": 199,
+    "t1": 9,
+    "t2": 14,
+    "Ix": 36900000
+  },
+  {
+    "Category": "TN",
+    "Name": "T275x200",
+    "IsStandard": true,
+    "H": 275,
+    "B": 200,
+    "t1": 10,
+    "t2": 16,
+    "Ix": 10700000
+  },
+  {
+    "Category": "TN",
+    "Name": "T298x199",
+    "IsStandard": true,
+    "H": 298,
+    "B": 199,
+    "t1": 10,
+    "t2": 15,
+    "Ix": 51500000
+  },
+  {
+    "Category": "TN",
+    "Name": "T300x200",
+    "IsStandard": true,
+    "H": 300,
+    "B": 200,
+    "t1": 11,
+    "t2": 17,
+    "Ix": 11400000
+  },
+  {
+    "Category": "TN",
+    "Name": "T303x201",
+    "IsStandard": true,
+    "H": 303,
+    "B": 201,
+    "t1": 12,
+    "t2": 20,
+    "Ix": 65300000
+  },
+  {
+    "Category": "TN",
+    "Name": "T312.5x198.5",
+    "IsStandard": true,
+    "H": 312.5,
+    "B": 198.5,
+    "t1": 11.5,
+    "t2": 17.5,
+    "Ix": 66900000
+  },
+  {
+    "Category": "TN",
+    "Name": "T315x200",
+    "IsStandard": true,
+    "H": 315,
+    "B": 200,
+    "t1": 13,
+    "t2": 20,
+    "Ix": 13400000
+  },
+  {
+    "Category": "TN",
+    "Name": "T319x202",
+    "IsStandard": true,
+    "H": 319,
+    "B": 202,
+    "t1": 15,
+    "t2": 24,
+    "Ix": 91400000
+  },
+  {
+    "Category": "TN",
+    "Name": "T323x299",
+    "IsStandard": true,
+    "H": 323,
+    "B": 299,
+    "t1": 10,
+    "t2": 15,
+    "Ix": 33400000
+  },
+  {
+    "Category": "TN",
+    "Name": "T325x300",
+    "IsStandard": true,
+    "H": 325,
+    "B": 300,
+    "t1": 11,
+    "t2": 17,
+    "Ix": 80900000
+  },
+  {
+    "Category": "TN",
+    "Name": "T328x301",
+    "IsStandard": true,
+    "H": 328,
+    "B": 301,
+    "t1": 12,
+    "t2": 20,
+    "Ix": 45500000
+  },
+  {
+    "Category": "TN",
+    "Name": "T346x300",
+    "IsStandard": true,
+    "H": 346,
+    "B": 300,
+    "t1": 13,
+    "t2": 20,
+    "Ix": 11200000
+  },
+  {
+    "Category": "TN",
+    "Name": "T350x300",
+    "IsStandard": true,
+    "H": 350,
+    "B": 300,
+    "t1": 13,
+    "t2": 24,
+    "Ix": 12000000
+  },
+  {
+    "Category": "TN",
+    "Name": "T396x300",
+    "IsStandard": true,
+    "H": 396,
+    "B": 300,
+    "t1": 14,
+    "t2": 22,
+    "Ix": 17600000
+  },
+  {
+    "Category": "TN",
+    "Name": "T400x300",
+    "IsStandard": true,
+    "H": 400,
+    "B": 300,
+    "t1": 14,
+    "t2": 26,
+    "Ix": 18700000
+  },
+  {
+    "Category": "TN",
+    "Name": "T445x299",
+    "IsStandard": true,
+    "H": 445,
+    "B": 299,
+    "t1": 15,
+    "t2": 23,
+    "Ix": 25900000
+  },
+  {
+    "Category": "TN",
+    "Name": "T450x300",
+    "IsStandard": true,
+    "H": 450,
+    "B": 300,
+    "t1": 16,
+    "t2": 28,
+    "Ix": 29100000
+  },
+  {
+    "Category": "TN",
+    "Name": "T456x302",
+    "IsStandard": true,
+    "H": 456,
+    "B": 302,
+    "t1": 18,
+    "t2": 34,
+    "Ix": 34100000
+  }
+]

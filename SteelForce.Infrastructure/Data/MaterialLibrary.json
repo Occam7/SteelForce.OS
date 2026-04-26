@@ -1,0 +1,9 @@
+[
+  { "Name": "Q235", "E": 206000, "Density": 7850 },
+  { "Name": "Q345", "E": 206000, "Density": 7850 },
+  { "Name": "Q355", "E": 206000, "Density": 7850 },
+  { "Name": "Q420", "E": 206000, "Density": 7850 },
+  { "Name": "A36",  "E": 200000, "Density": 7850 },
+  { "Name": "S355", "E": 210000, "Density": 7850 },
+  { "Name": "Aluminum", "E": 70000, "Density": 2700 }
+]

@@ -64,50 +64,40 @@ public class XbimParser : IIfcParser
         var component = new BimComponent
         {
             Guid = element.GlobalId,
-            Name = "Unknown",
+            Name = element.Name?.ToString() ?? "Unknown",
             IfcType = element.GetType().Name.Replace("Ifc", "")
         };
-
-        try
-        {
-            if (element.Name != null)
-            {
-                component.Name = element.Name.ToString();
-            }
-        }
-        catch
-        {
-            component.Name = "Unknown";
-        }
-
-        ExtractProperties(element, component, model);
+        
+        ExtractProperties(element, component);
         ExtractMaterial(element, component);
+        DetectSupportCondition(element, component);
 
-        double? lengthFromProperty = GetLengthFromProperties(element, model);
-        double? lengthFromGeometry = null;
+        double? finalLength = GetLengthFromQto(element)
+                              ?? GetLengthFromStandardPset(element)
+                              ?? GetLengthFromFallback(element);
 
-        if (lengthFromProperty.HasValue && lengthFromProperty.Value > 0)
+        if (finalLength.HasValue && finalLength.Value > 0)
         {
-            component.Length = ConvertToMillimeters(lengthFromProperty.Value, model);
+            component.Length = ConvertToMillimeters(finalLength.Value, model);
             component.LengthFromGeometry = false;
         }
         else
         {
-            lengthFromGeometry = GetLengthFromGeometry(element, model);
-            if (lengthFromGeometry.HasValue && lengthFromGeometry.Value > 0)
+            double? geoLen = GetLengthFromGeometry(element, model);
+            if (geoLen.HasValue && geoLen.Value > 0)
             {
-                component.Length = lengthFromGeometry.Value;
+                component.Length = geoLen.Value;
                 component.LengthFromGeometry = true;
             }
         }
-
+        
         ResolveMissingParameters(component);
         return component;
     }
 
     private void ResolveMissingParameters(BimComponent component)
     {
-
+        // 识别型号
         if (string.IsNullOrEmpty(component.SectionType))
         {
             if (_parameterResolver.TryInferSectionType(component, out var inferredSection))
@@ -115,29 +105,25 @@ public class XbimParser : IIfcParser
                 component.SectionType = inferredSection;
             }
         }
-
+        
+        // 调用材质库添加弹性模量
         if (component.ElasticModulus <= 0)
         {
-            if (_parameterResolver.TryResolveElasticModulusFromMaterialLibrary(component.Material ?? "", out var resolvedE))
+            if (!_parameterResolver.TryResolveElasticModulus(component.Material ?? "", out var resolvedE))
+            {
+                component.ElasticModulus = _parameterResolver.GetDefaultElasticModulus();
+            }
+            else
             {
                 component.ElasticModulus = resolvedE;
             }
-            else
-            {
-                component.ElasticModulus = _parameterResolver.GetDefaultElasticModulus(component.Material ?? "");
-            }
         }
-
+        
+        // 惯性矩
         if (component.MomentOfInertia <= 0)
         {
-            if (_parameterResolver.TryResolveInertiaFromSectionLibrary(component.SectionType ?? "", out var resolvedI))
-            {
-                component.MomentOfInertia = resolvedI;
-            }
-            else
-            {
-                component.MomentOfInertia = _parameterResolver.EstimateInertiaFromDimensions(component);
-            }
+            _parameterResolver.TryResolveInertia(component.SectionType ?? "", out var resolvedI);
+            component.MomentOfInertia = resolvedI;
         }
 
         if (component.DesignLoad <= 0)
@@ -145,84 +131,68 @@ public class XbimParser : IIfcParser
             component.DesignLoad = 1.0;
         }
 
-        if (component.DeflectionLimitRatio <= 0)
+        if (component.DeflectionLimitRatio <= 0 || component.DeflectionLimitRatio == 250)
         {
-            component.DeflectionLimitRatio = 250.0;
+            component.DeflectionLimitRatio = _parameterResolver.GetDeflectionLimit(component);
         }
     }
 
-    private void ExtractProperties(IIfcBuildingElement element, BimComponent component, IModel model)
+    private void ExtractProperties(IIfcBuildingElement element, BimComponent component)
     {
         try
         {
-            var propertySets = element.IsDefinedBy
+            var props = element.IsDefinedBy
                 .Select(r => r.RelatingPropertyDefinition)
-                .OfType<IIfcPropertySet>();
+                .OfType<IIfcPropertySet>().SelectMany(p => p.HasProperties).OfType<IIfcPropertySingleValue>();
 
-            foreach (var pset in propertySets)
+            foreach (var prop in props)
             {
-                foreach (var prop in pset.HasProperties.OfType<IIfcPropertySingleValue>())
+                string name = prop?.Name.ToString()?.ToUpperInvariant() ?? "";
+                if (string.IsNullOrEmpty(name)) continue;
+                var rawValue = prop.NominalValue?.Value;
+                if (rawValue == null) continue;
+
+                try
                 {
-                    string propName = "";
-                    try
+                    // 惯性矩 (I)
+                    if (name.Contains("INERTIA") || name.Contains("MOMENT"))
                     {
-                        if (prop.Name != null)
-                        {
-                            propName = prop.Name.ToString().ToUpperInvariant();
-                        }
+                        component.MomentOfInertia = Convert.ToDouble(rawValue);
                     }
-                    catch
+                    // 弹性模量 (E)
+                    else if (name.Contains("ELASTIC") || name.Contains("MODULUS"))
                     {
-                        continue;
+                        component.ElasticModulus = Convert.ToDouble(rawValue);
                     }
-
-                    var nominalValue = prop.NominalValue;
-                    var propValue = prop.NominalValue?.Value;
-                    if (propValue == null) continue;
-
-                    var valueStr = propValue.ToString() ?? "";
-
-                    if (propName.Contains("INERTIA") || propName.Contains("MOMENT"))
+                    // 设计荷载 (q)
+                    else if (name.Contains("LOAD"))
                     {
-                        if (double.TryParse(valueStr, out var inertia))
-                        {
-                            component.MomentOfInertia = inertia;
-                        }
+                        component.DesignLoad = Convert.ToDouble(rawValue);
                     }
-                    else if (propName.Contains("ELASTIC") || propName.Contains("MODULUS"))
+                    // 挠度限值 (L/250, L/1000等)
+                    else if (name.Contains("LIMIT") || name.Contains("DEFLECTION"))
                     {
-                        if (double.TryParse(valueStr, out var elasticModulus))
-                        {
-                            component.ElasticModulus = elasticModulus;
-                        }
+                        component.DeflectionLimitRatio = Convert.ToDouble(rawValue);
                     }
-                    else if (propName.Contains("LOAD"))
+                    // 截面与材质索引
+                    else if (name.Contains("SECTION") || name.Contains("PROFILE"))
                     {
-                        if (double.TryParse(valueStr, out var load))
-                        {
-                            component.DesignLoad = load;
-                        }
+                        component.SectionType = rawValue.ToString();
                     }
-                    else if (propName.Contains("LIMIT") || propName.Contains("DEFLECTION"))
+                    else if (name.Contains("MATERIAL"))
                     {
-                        if (double.TryParse(valueStr, out var limit))
-                        {
-                            component.DeflectionLimitRatio = limit;
-                        }
+                        component.Material = rawValue.ToString();
                     }
-                    else if (propName.Contains("SECTION") || propName.Contains("PROFILE"))
-                    {
-                        component.SectionType = valueStr;
-                    }
-                    else if (propName.Contains("MATERIAL"))
-                    {
-                        component.Material = valueStr;
-                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"[数据转换异常] 构件: {element.GlobalId}, 属性: {name}, 原因: {ex.Message}");
                 }
             }
         }
-        catch
+        catch (Exception e)
         {
+            Console.WriteLine($"[属性提取异常] 构件: {element.GlobalId}, 原因: {e.Message}");
         }
     }
 
@@ -282,87 +252,54 @@ public class XbimParser : IIfcParser
                 }
             }
         }
-        catch
+        catch (Exception e)
         {
+            Console.WriteLine($"[材质提取异常] 构件: {element.GlobalId}, 原因: {e.Message}");
+            component.Material = "Error_Check_Model"; 
         }
     }
 
-    private double? GetLengthFromProperties(IIfcBuildingElement element, IModel model)
-    {
-        try
-        {
-            var properties = element.IsDefinedBy
-                .Select(r => r.RelatingPropertyDefinition)
-                .OfType<IIfcPropertySet>()
-                .SelectMany(p => p.HasProperties)
-                .OfType<IIfcPropertySingleValue>();
-
-            foreach (var prop in properties)
-            {
-                string propName = "";
-                try
-                {
-                    if (prop.Name != null)
-                    {
-                        propName = prop.Name.ToString().ToUpperInvariant();
-                    }
-                }
-                catch
-                {
-                    continue;
-                }
-
-                var propValue = prop.NominalValue?.Value;
-                if (propValue == null) continue;
-
-                var valueStr = propValue.ToString() ?? "";
-
-                if (propName.Contains("LENGTH") || propName.Contains("HEIGHT"))
-                {
-                    if (double.TryParse(valueStr, out var length))
-                    {
-                        return ConvertToMillimeters(length, model);
-                    }
-                }
-            }
-        }
-        catch
-        {
-        }
-
-        return null;
-    }
-
+    
     private double? GetLengthFromGeometry(IIfcBuildingElement element, IModel model)
     {
+        if (element?.Representation == null) return null;
+
         try
         {
-            var representation = element.Representation;
-            if (representation == null) return null;
+            var axisRep = element.Representation.Representations
+                .FirstOrDefault(r => r.RepresentationIdentifier?.ToString().ToUpper() == "AXIS");
 
-            foreach (var repItem in representation.Representations.SelectMany(r => r.Items))
+            if (axisRep != null)
             {
-                if (repItem is IIfcExtrudedAreaSolid extrudedSolid)
+                var axisLength = CalculateAxisLength(axisRep, model);
+                if (axisLength.HasValue && axisLength.Value > 0) return axisLength;
+            }
+
+            foreach (var rep in element.Representation.Representations)
+            {
+                foreach (var item in rep.Items)
                 {
-                    var length = CalculateLengthFromExtrusion(extrudedSolid, model);
-                    if (length.HasValue) return length;
-                }
-                else if (repItem is IIfcBooleanResult booleanResult)
-                {
-                    var length = CalculateLengthFromBooleanResult(booleanResult, model);
-                    if (length.HasValue) return length;
+                    if (item is IIfcExtrudedAreaSolid extruded)
+                    {
+                        return CalculateLengthFromExtrusion(extruded, model, element.GlobalId);
+                    }
+                    else if (item is IIfcBooleanResult booleanResult)
+                    {
+                        return CalculateLengthFromBooleanResult(booleanResult, model, element.GlobalId);
+                    }
                 }
             }
 
-            return 3000;
+            return null;
         }
-        catch
+        catch (Exception e)
         {
+            Console.WriteLine($"[几何解析异常] 构件: {element.GlobalId}, 原因: {e.Message}");
             return null;
         }
     }
 
-    private double? CalculateLengthFromExtrusion(IIfcExtrudedAreaSolid extrudedSolid, IModel model)
+    private double? CalculateLengthFromExtrusion(IIfcExtrudedAreaSolid extrudedSolid, IModel model, string globalId)
     {
         try
         {
@@ -372,28 +309,30 @@ public class XbimParser : IIfcParser
                 return ConvertToMillimeters(depth, model);
             }
         }
-        catch
+        catch (Exception e)
         {
+            Console.WriteLine($"[几何细节异常] 构件: {globalId}, 类型: ExtrudedAreaSolid, 原因: {e.Message}");
         }
 
         return null;
     }
 
-    private double? CalculateLengthFromBooleanResult(IIfcBooleanResult booleanResult, IModel model)
+    private double? CalculateLengthFromBooleanResult(IIfcBooleanResult booleanResult, IModel model, string globalId)
     {
         try
         {
             if (booleanResult.FirstOperand is IIfcExtrudedAreaSolid firstExtruded)
             {
-                return CalculateLengthFromExtrusion(firstExtruded, model);
+                return CalculateLengthFromExtrusion(firstExtruded, model, globalId);
             }
             else if (booleanResult.FirstOperand is IIfcBooleanResult nestedResult)
             {
-                return CalculateLengthFromBooleanResult(nestedResult, model);
+                return CalculateLengthFromBooleanResult(nestedResult, model, globalId);
             }
         }
-        catch
+        catch(Exception e)
         {
+            Console.WriteLine($"[几何细节异常] 构件: {globalId}, 类型: BooleanResult, 原因: {e.Message}");
         }
 
         return null;
@@ -402,5 +341,178 @@ public class XbimParser : IIfcParser
     private double ConvertToMillimeters(double rawValue, IModel model)
     {
         return (rawValue / model.ModelFactors.OneMetre) * 1000.0;
+    }
+
+    private void DetectSupportCondition(IIfcBuildingElement element, BimComponent component)
+    {
+        try
+        {
+            var allRels = element.ConnectedTo.Concat(element.ConnectedFrom);
+            var neighbors = allRels
+                .Select(rel => rel.RelatingElement == element ? rel.RelatedElement : rel.RelatingElement)
+                .Where(neighbor => neighbor != null)
+                .Select(neighbor => neighbor.GlobalId.ToString())
+                .Distinct();
+            int count = neighbors.Count();
+            component.ConnectionCount = count;
+            if (count == 1)
+            {
+                component.Support = SupportCondition.Cantilever;
+            }
+            else if (count >= 2)
+            {
+                component.Support = SupportCondition.SimplySupported;
+            }
+            else
+            {
+                component.Support = SupportCondition.SimplySupported;
+            }
+
+            
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"[警告] 构件 {element.GlobalId} ({element.Name}) 连接关系解析失败。");
+            Console.WriteLine($"原因: {e.Message}");
+
+            component.Support = SupportCondition.SimplySupported;
+            component.ConnectionCount = 0;
+        }
+    }
+
+    private double? GetLengthFromQto(IIfcBuildingElement element)
+    {
+        if (element == null) return null;
+        
+        try
+        {
+            var qto = element.IsDefinedBy
+                .Select(r => r.RelatingPropertyDefinition)
+                .OfType<IIfcElementQuantity>()
+                .FirstOrDefault(q => 
+                    q.Name.ToString().ToUpper().Contains("BEAMBASEQUANTITIES") || 
+                    q.Name.ToString().ToUpper().Contains("COLUMNBASEQUANTITIES"));
+
+            if (qto == null) return null;
+
+            var lengthQuantity = qto.Quantities
+                .OfType<IIfcQuantityLength>()
+                .FirstOrDefault(q => q.Name.ToString().ToUpper() == "LENGTH");
+
+            return lengthQuantity?.LengthValue;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"[警告] 构件 {element?.GlobalId ?? "Unknown"} 的 Qto 提取失败: {e.Message}");
+            return null;
+        }
+    }
+
+    private double? GetLengthFromStandardPset(IIfcBuildingElement element)
+    {
+        if (element == null) return null;
+        
+        try
+        {
+            var pSet = element.IsDefinedBy
+                .Select(r => r.RelatingPropertyDefinition)
+                .OfType<IIfcPropertySet>()
+                .FirstOrDefault(p => 
+                    p.Name.ToString().ToUpper().Contains("BEAMCOMMON") || 
+                    p.Name.ToString().ToUpper().Contains("COLUMNCOMMON"));
+
+            if (pSet == null) return null;
+
+            var prop = pSet.HasProperties
+                .OfType<IIfcPropertySingleValue>()
+                .FirstOrDefault(p => 
+                    p.Name.ToString().ToUpper() == "SPAN" || 
+                    p.Name.ToString().ToUpper() == "LENGTH");
+
+            var rawValue = prop?.NominalValue?.Value;
+            return rawValue != null ? Convert.ToDouble(rawValue) : (double?)null;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"[警告] 构件 {element?.GlobalId ?? "Unknown"} 的 Pset 提取失败: {e.Message}");
+            return null;
+        }
+    }
+
+    private double? GetLengthFromFallback(IIfcBuildingElement element)
+    {
+        if (element == null) return null;
+
+        try
+        {
+            var candidateProps = element.IsDefinedBy
+                .Where(r => r.RelatingPropertyDefinition != null) 
+                .Select(r => r.RelatingPropertyDefinition)
+                .OfType<IIfcPropertySet>()
+                .SelectMany(p => p.HasProperties)
+                .OfType<IIfcPropertySingleValue>()
+                .ToList(); 
+
+            var foundValues = new Dictionary<string, double>();
+
+            foreach (var prop in candidateProps)
+            {
+                string name = prop.Name.ToString().ToUpper();
+    
+                if ((name.Contains("LENGTH") || name.Contains("SPAN")) && !name.Contains("HEIGHT"))
+                {
+                    var rawValue = prop.NominalValue?.Value;
+                    if (rawValue != null)
+                    {
+                        try
+                        {
+                            double val = Convert.ToDouble(rawValue);
+                            if (val > 0) foundValues[name] = val;
+                        }
+                        catch { continue; }
+                    }
+                }
+            }
+
+            if (foundValues.Count == 0) return null;
+        
+            return foundValues.Keys.Any(k => k == "LENGTH") 
+                ? foundValues["LENGTH"] 
+                : foundValues.Values.Max();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"[Fallback 严重异常] ID: {element?.GlobalId ?? "Unknown"}, 原因: {e.Message}");
+            return null;
+        }
+    }
+
+    private double? CalculateAxisLength(IIfcRepresentation axisRep, IModel model)
+    {
+        double totalDist = 0;
+        bool found = false;
+
+        foreach (var item in axisRep.Items)
+        {
+            if (item is IIfcPolyline polyline)
+            {
+                var pts = polyline.Points;
+                for (int i = 0; i < pts.Count - 1; i++)
+                {
+                    totalDist += CalculateDistance(pts[i], pts[i + 1]);
+                    found = true;
+                }
+            }
+        }
+
+        return found ? ConvertToMillimeters(totalDist, model) : (double?)null;
+    }
+
+    private double CalculateDistance(IIfcCartesianPoint p1, IIfcCartesianPoint p2)
+    {
+        var d1 = p1.Coordinates[0] - p2.Coordinates[0];
+        var d2 = p1.Coordinates[1] - p2.Coordinates[1];
+        var d3 = (p1.Coordinates.Count > 2 && p2.Coordinates.Count > 2) ? p1.Coordinates[2] - p2.Coordinates[2] : 0;
+        return Math.Sqrt(d1 * d1 + d2 * d2 + d3 * d3);
     }
 }

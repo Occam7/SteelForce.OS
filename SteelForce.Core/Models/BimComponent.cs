@@ -1,7 +1,37 @@
 namespace SteelForce.Core.Models;
 
+/// <summary>
+/// 构件的支撑条件
+/// </summary>
+public enum SupportCondition
+{
+    /// <summary>
+    /// 简支梁
+    /// </summary>
+    SimplySupported,
+        
+    /// <summary>
+    /// 悬臂 一头焊丝 一头悬空
+    /// </summary>
+    Cantilever,
+        
+    /// <summary>
+    /// 两头固定
+    /// </summary>
+    FixedBothEnds
+}
 public class BimComponent
 {
+    /// <summary>
+    /// 判定出的支撑条件,决定了计算引擎应选择哪个物理公式
+    /// </summary>
+    public SupportCondition Support { get; set; } = SupportCondition.SimplySupported;
+
+    /// <summary>
+    /// 记录在IFC中侦察到的邻居数量
+    /// 用于审计和逻辑回溯
+    /// </summary>
+    public int ConnectionCount { get; set; }
     
     /// <summary>
     /// 构件全局唯一标识符 (GUID)
