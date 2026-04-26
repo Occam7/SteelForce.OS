@@ -149,8 +149,24 @@ public class DeflectionComplianceEngine : IComplianceEngine
         double E = component.ElasticModulus;
         double I = component.MomentOfInertia;
         double Q = component.DesignLoad;
+
+        double deflection;
+        string formula;
         
-        double deflection = (5.0 * Q * Math.Pow(L, 4)) / (384 * E * I);
+        // 核心逻辑：根据物理姿态（SupportCondition）切换计算公式
+        if (component.Support == SupportCondition.Cantilever)
+        {
+            // 悬臂梁挠度公式: v = (q * L⁴) / (8 * E * I)
+            deflection = (Q * Math.Pow(L, 4)) / (8 * E * I);
+            formula = "v = (q * L⁴) / (8 * E * I)";
+        }
+        else
+        {
+            // 简支梁挠度公式: v = (5 * q * L⁴) / (384 * E * I)
+            deflection = (5.0 * Q * Math.Pow(L, 4)) / (384 * E * I);
+            formula = "v = (5 * q * L⁴) / (384 * E * I)";
+        }
+        
         double allowedDeflection = component.GetAllowedDeflection();
         
         return new DeflectionCalculationResult
@@ -159,14 +175,14 @@ public class DeflectionComplianceEngine : IComplianceEngine
             AllowedDeflection = allowedDeflection,
             UtilizationRatio = allowedDeflection > 0 ? deflection / allowedDeflection : 0,  
             IsPassed = deflection <= allowedDeflection,
-            Formula = "v = (5 * q * L⁴) / (384 * E * I)",
+            Formula = formula,
             Parameters = new DeflectionCalculationParameters
             {
                 Length = L,
                 ElasticModulus = E,
                 MomentOfInertia = I,
                 DesignLoad = Q,
-                Formula = "v = (5 * q * L⁴) / (384 * E * I)"
+                Formula = formula // 记录实际使用的公式，方便审计追溯
             }
         };
     }
@@ -185,13 +201,15 @@ public class DeflectionComplianceEngine : IComplianceEngine
         }
         else
         {
+            // 修复点：将第二个参数由 ActualDeflection 改为 AllowedDeflection
+            // 确保审计报告中能清晰显示“实际值”与“限值”的对比
             return ValidationResult.CreateFailure(
                 component.Guid,
                 component.Name,
                 calculationResult.ActualDeflection,
-                calculationResult.ActualDeflection,
+                calculationResult.AllowedDeflection, 
                 calculationResult.Parameters,
-                "");
+                "构件挠度计算值超过规范限值");
         }
     }
 }

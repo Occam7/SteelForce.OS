@@ -1,251 +1,80 @@
-﻿// // SteelForce.OS - 调试追踪程序
-// // 详细追踪 XbimParser 和 StandardParameterResolver 的数据流
-// //
-// // 使用方法:
-// // 1. 复制此代码到 SteelForce.OS/SteelForce.Console/Program.cs
-// // 2. 修改 filePath 变量指向你的 IFC 文件
-// // 3. 运行项目
-//
-// using SteelForce.Core.Interfaces;
-// using SteelForce.Core.Models;
-// using SteelForce.Services.Parsers;
-// using SteelForce.Services.Resolvers;
-//
-// System.System.Console.WriteLine("═══════════════════════════════════════════════════════════════");
-// System.System.Console.WriteLine("           SteelForce.OS - 数据流调试追踪工具");
-// System.System.Console.WriteLine("═══════════════════════════════════════════════════════════════");
-// System.System.Console.WriteLine();
-//
-// // 配置
-// var filePath = "/Users/jayden/RiderProjects/SteelForce.OS/data/Building-Architecture.ifc";
-// var maxComponentsToDebug = 3; // 只调试前 3 个构件，避免输出过多
-//
-// if (!File.Exists(filePath))
-// {
-//     System.System.Console.WriteLine($"❌ 文件不存在: {filePath}");
-//     System.System.Console.WriteLine("请修改 filePath 变量指向正确的 IFC 文件路径");
-//     Console.ReadKey();
-//     return;
-// }
-//
-// System.System.Console.WriteLine($"📁 目标文件: {filePath}");
-// System.System.Console.WriteLine($"🔢 调试构件数量: 前 {maxComponentsToDebug} 个");
-// System.System.Console.WriteLine();
-//
-// try
-// {
-//     System.System.Console.WriteLine("═══════════════════════════════════════════════════════════════");
-//     System.System.Console.WriteLine("           阶段 1: 创建服务实例");
-//     System.System.Console.WriteLine("═══════════════════════════════════════════════════════════════");
-//     System.System.Console.WriteLine();
-//
-//     System.System.Console.WriteLine("📦 创建 StandardParameterResolver...");
-//     var parameterResolver = new StandardParameterResolver();
-//     System.System.Console.WriteLine("✅ StandardParameterResolver 创建成功");
-//     System.System.Console.WriteLine();
-//
-//     System.System.Console.WriteLine("📦 创建 XbimParser (注入 StandardParameterResolver)...");
-//     var parser = new XbimParser(parameterResolver);
-//     System.System.Console.WriteLine("✅ XbimParser 创建成功");
-//     System.System.Console.WriteLine();
-//
-//     System.System.Console.WriteLine("═══════════════════════════════════════════════════════════════");
-//     System.System.Console.WriteLine("           阶段 2: 解析 IFC 文件");
-//     System.System.Console.WriteLine("═══════════════════════════════════════════════════════════════");
-//     System.System.Console.WriteLine();
-//
-//     System.System.Console.WriteLine("🔍 开始解析 IFC 文件...");
-//     var stopwatch = System.Diagnostics.Stopwatch.StartNew();
-//     var components = parser.Parse(filePath).ToList();
-//     stopwatch.Stop();
-//
-//     System.System.Console.WriteLine($"✅ 解析完成！");
-//     System.System.Console.WriteLine($"   • 找到 {components.Count} 个构件");
-//     System.System.Console.WriteLine($"   • 耗时: {stopwatch.ElapsedMilliseconds}ms");
-//     System.System.Console.WriteLine();
-//
-//     if (components.Count == 0)
-//     {
-//         System.System.Console.WriteLine("⚠️  未找到任何构件");
-//         Console.ReadKey();
-//         return;
-//     }
-//
-//     System.System.Console.WriteLine("═══════════════════════════════════════════════════════════════");
-//     System.System.Console.WriteLine("           阶段 3: 详细追踪每个构件的数据流程");
-//     System.System.Console.WriteLine("═══════════════════════════════════════════════════════════════");
-//     System.System.Console.WriteLine();
-//
-//     for (int i = 0; i < Math.Min(components.Count, maxComponentsToDebug); i++)
-//     {
-//         var component = components[i];
-//         System.System.Console.WriteLine($"────────────────────────────────────────────────────────────");
-//         System.System.Console.WriteLine($"🔍 构件 {i + 1}: {component.Name}");
-//         System.System.Console.WriteLine($"────────────────────────────────────────────────────────────");
-//         System.System.Console.WriteLine();
-//
-//         System.System.Console.WriteLine("📋 1. 从 XbimParser 获取的原始数据:");
-//         System.System.Console.WriteLine("   ├─ GUID:        " + component.Guid);
-//         System.System.Console.WriteLine("   ├─ 名称:        " + component.Name);
-//         System.System.Console.WriteLine("   ├─ IFC 类型:    " + component.IfcType);
-//         System.System.Console.WriteLine("   ├─ 材料:        " + (string.IsNullOrEmpty(component.Material) ? "(未找到)" : component.Material));
-//         System.System.Console.WriteLine("   ├─ 长度:        " + (component.Length > 0 ? $"{component.Length:F0} mm" : "(未计算)"));
-//         System.System.Console.WriteLine("   ├─ 截面类型:    " + (string.IsNullOrEmpty(component.SectionType) ? "(未找到)" : component.SectionType));
-//         System.System.Console.WriteLine();
-//
-//         System.System.Console.WriteLine("🔧 2. StandardParameterResolver 参数解析:");
-//         System.System.Console.WriteLine();
-//
-//         System.System.Console.WriteLine("   a) 推断截面类型:");
-//         var inferResult = parameterResolver.TryInferSectionType(component, out var inferredSection);
-//         System.System.Console.WriteLine("      ├─ 输入材料: " + (string.IsNullOrEmpty(component.Material) ? "(null)" : component.Material));
-//         System.System.Console.WriteLine("      ├─ 输入名称: " + (string.IsNullOrEmpty(component.Name) ? "(null)" : component.Name));
-//         System.System.Console.WriteLine("      ├─ 推断结果: " + (inferResult ? "✅ 成功" : "❌ 失败"));
-//         System.System.Console.WriteLine("      └─ 推断截面: " + (string.IsNullOrEmpty(inferredSection) ? "(null)" : inferredSection));
-//         System.System.Console.WriteLine();
-//
-//         System.System.Console.WriteLine("   b) 从材料库获取弹性模量 E:");
-//         var eResult = parameterResolver.TryResolveElasticModulusFromMaterialLibrary(component.Material ?? "", out var resolvedE);
-//         var defaultE = parameterResolver.GetDefaultElasticModulus(component.Material ?? "");
-//         System.System.Console.WriteLine("      ├─ 输入材料: " + (string.IsNullOrEmpty(component.Material) ? "(null)" : component.Material));
-//         System.System.Console.WriteLine("      ├─ 库查询结果: " + (eResult ? "✅ 命中" : "❌ 未命中"));
-//         System.System.Console.WriteLine("      ├─ 库查询值: " + (eResult ? $"{resolvedE:F0} MPa" : "(无)"));
-//         System.System.Console.WriteLine("      └─ 默认值:     " + $"{defaultE:F0} MPa");
-//         System.System.Console.WriteLine();
-//
-//         System.System.Console.WriteLine("   c) 从截面库获取惯性矩 I:");
-//         var iResult = parameterResolver.TryResolveInertiaFromSectionLibrary(inferredSection, out var resolvedI);
-//         var estimatedI = parameterResolver.EstimateInertiaFromDimensions(component);
-//         System.System.Console.WriteLine("      ├─ 输入截面: " + (string.IsNullOrEmpty(inferredSection) ? "(null)" : inferredSection));
-//         System.System.Console.WriteLine("      ├─ 库查询结果: " + (iResult ? "✅ 命中" : "❌ 未命中"));
-//         System.System.Console.WriteLine("      ├─ 库查询值: " + (iResult ? $"{resolvedI:E2} mm⁴" : "(无)"));
-//         System.System.Console.WriteLine("      └─ 估算值:     " + (estimatedI > 0 ? $"{estimatedI:E2} mm⁴" : "(无法估算)"));
-//         System.System.Console.WriteLine();
-//
-//         System.System.Console.WriteLine("📊 3. 最终 BimComponent 状态:");
-//         System.System.Console.WriteLine("   ├─ 弹性模量 E: " + (component.ElasticModulus > 0 ? $"{component.ElasticModulus:F0} MPa" : "(未设置)"));
-//         System.System.Console.WriteLine("   ├─ 惯性矩 I:   " + (component.MomentOfInertia > 0 ? $"{component.MomentOfInertia:E2} mm⁴" : "(未设置)"));
-//         System.System.Console.WriteLine("   ├─ 设计荷载 q: " + (component.DesignLoad > 0 ? $"{component.DesignLoad:F2} N/mm" : "(未设置)"));
-//         System.System.Console.WriteLine("   └─ 限值分母:   " + (component.DeflectionLimitRatio > 0 ? $"L/{component.DeflectionLimitRatio:F0}" : "(未设置)"));
-//         System.System.Console.WriteLine();
-//     }
-//
-//     System.System.Console.WriteLine("═══════════════════════════════════════════════════════════════");
-//     System.System.Console.WriteLine("           阶段 4: 所有构件汇总");
-//     System.System.Console.WriteLine("═══════════════════════════════════════════════════════════════");
-//     System.System.Console.WriteLine();
-//
-//     System.System.Console.WriteLine("📋 构件列表汇总:");
-//     System.System.Console.WriteLine(new string('-', 140));
-//     System.System.Console.WriteLine($"{"#",-4} {"GUID",-38} {"名称",-25} {"类型",-12} {"长度(mm)",-12} {"材质",-15} {"E(MPa)",-10}");
-//     System.System.Console.WriteLine(new string('-', 140));
-//
-//     for (int i = 0; i < components.Count; i++)
-//     {
-//         var c = components[i];
-//         var lengthStr = c.Length > 0 ? $"{c.Length:F0}" : "-";
-//         var materialStr = string.IsNullOrEmpty(c.Material) ? "-" : c.Material;
-//         var eStr = c.ElasticModulus > 0 ? $"{c.ElasticModulus:F0}" : "-";
-//
-//         System.System.Console.WriteLine($"{i + 1,-4} {c.Guid,-38} {c.Name,-25} {c.IfcType,-12} {lengthStr,-12} {materialStr,-15} {eStr,-10}");
-//     }
-//
-//     System.System.Console.WriteLine(new string('-', 140));
-//     System.System.Console.WriteLine();
-//
-//     System.System.Console.WriteLine("📈 统计信息:");
-//     System.System.Console.WriteLine("   • 总构件数: " + components.Count);
-//     System.System.Console.WriteLine("   • 有材料:   " + components.Count(c => !string.IsNullOrEmpty(c.Material)));
-//     System.System.Console.WriteLine("   • 有长度:   " + components.Count(c => c.Length > 0));
-//     System.System.Console.WriteLine("   • 有 E:      " + components.Count(c => c.ElasticModulus > 0));
-//     System.System.Console.WriteLine("   • 有 I:      " + components.Count(c => c.MomentOfInertia > 0));
-//     System.System.Console.WriteLine();
-//
-//     System.System.Console.WriteLine("═══════════════════════════════════════════════════════════════");
-//     System.System.Console.WriteLine("           调试完成！");
-//     System.System.Console.WriteLine("═══════════════════════════════════════════════════════════════");
-// }
-// catch (Exception ex)
-// {
-//     System.System.Console.WriteLine();
-//     System.System.Console.WriteLine("═══════════════════════════════════════════════════════════════");
-//     System.System.Console.WriteLine("           ❌ 发生错误");
-//     System.System.Console.WriteLine("═══════════════════════════════════════════════════════════════");
-//     System.System.Console.WriteLine();
-//     System.System.Console.WriteLine($"错误信息: {ex.Message}");
-//     System.System.Console.WriteLine();
-//     System.System.Console.WriteLine("堆栈跟踪:");
-//     System.System.Console.WriteLine(ex.StackTrace);
-//     System.System.Console.WriteLine();
-// }
-// System.System.Console.WriteLine();
-// System.System.Console.WriteLine("按任意键退出...");
-// Console.ReadKey();
-using System;
-using System.Linq;
-using Xbim.Ifc;
-using Xbim.Common;
-using Xbim.Ifc.Validation;
+﻿using System.Text;
+using SteelForce.Core.Models;
+using SteelForce.Services.Compliance;
+using SteelForce.Services.Parsers;
+using SteelForce.Services.Resolvers;
 
-using System.Text.Json;
-using System;
-namespace SteelForce.Console
+// 1. 基础配置
+// 确保 JSON 文件在 Infrastructure/Data 目录下，并且属性设置为“如果较新则复制”
+string baseDir = AppDomain.CurrentDomain.BaseDirectory;
+string sectionJson = Path.Combine(baseDir, "Data", "SteelLibrary.json");
+string materialJson = Path.Combine(baseDir, "Data", "MaterialLibrary.json");
+
+// 请将此路径指向你刚才保存的测试 IFC 文件
+string ifcFilePath = "/Users/jayden/RiderProjects/SteelForce.OS/data/Test.ifc";
+
+Console.OutputEncoding = Encoding.UTF8;
+Console.WriteLine("=== SteelForce.OS 工业审计级测试启动 ===");
+Console.WriteLine($"[配置] 截面库: {Path.GetFileName(sectionJson)}");
+Console.WriteLine($"[配置] 材质库: {Path.GetFileName(materialJson)}");
+Console.WriteLine("------------------------------------------");
+
+try
 {
+    // 2. 初始化核心组件
+    // 参数解析器：负责查表和公式反算
+    var resolver = new StandardParameterResolver(sectionJson, materialJson);
     
-    public class SteelSection
-    {
-        public string Category { get; set; } = string.Empty; // HW, HM等 [cite: 115]
-        public string Name { get; set; } = string.Empty;     // 型号名称 [cite: 116]
-        public double H { get; set; }                        // 高度 (mm) [cite: 116]
-        public double B { get; set; }                        // 宽度 (mm) [cite: 117]
-        public double Ix { get; set; }                       // 强轴惯性矩 (mm⁴) [cite: 118]
-    }
+    // IFC 解析器：负责从模型提取几何、属性和连接关系
+    var parser = new XbimParser(resolver);
     
-    class Program
+    // 合规性引擎：负责根据姿态执行物理计算
+    var engine = new DeflectionComplianceEngine();
+
+    // 3. 执行解析
+    Console.WriteLine($"[1/3] 正在解析 IFC 文件: {Path.GetFileName(ifcFilePath)}...");
+    var components = parser.Parse(ifcFilePath).ToList();
+    Console.WriteLine($"[OK] 提取到 {components.Count} 个结构构件。");
+
+    // 4. 执行合规性批量校验
+    Console.WriteLine("[2/3] 正在执行多线程批量校验...");
+    var results = await engine.ValidateBatchAsync(components);
+
+    // 5. 输出审计报告
+    Console.WriteLine("[3/3] 校验完成，生成详细结果：\n");
+    Console.WriteLine("{0,-25} | {1,-12} | {2,-15} | {3,-10} | {4,-10}", 
+        "构件名称 (GUID)", "物理姿态", "使用的公式", "实际挠度", "结论");
+    Console.WriteLine(new string('-', 85));
+
+    foreach (var res in results)
     {
-        static void Main(string[] args)
+        string status = res.IsPassed ? "✅ 合格" : "❌ 不合格";
+        
+        // 提取计算参数中的公式，验证是否触发了 (qL^4)/8EI
+        string formula = res.CalculationParameters?.Formula ?? "未知";
+        string support = components.First(c => c.Guid == res.ComponentGuid).Support.ToString();
+
+        Console.WriteLine("{0,-25} | {1,-12} | {2,-15} | {3,10:F2}mm | {4,-10}", 
+            $"{res.ComponentName} ({res.ComponentGuid.Substring(0,8)})", 
+            support,
+            formula.Replace("v = ", "").Replace(" ", ""), // 简化显示
+            res.ActualDeflection, 
+            status);
+
+        if (!res.IsPassed)
         {
-
-
-            // 1. 定位文件路径 (Rider 编译后文件在 bin 目录下) 
-            string jsonPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data", "SteelLibrary.json");
-
-            System.Console.WriteLine($"[开始测试] 正在读取路径: {jsonPath}");
-
-            try 
-            {
-                // 2. 检查文件是否存在 [cite: 107]
-                if (!File.Exists(jsonPath))
-                {
-                    System.Console.WriteLine("❌ 错误：找不到 JSON 文件！请检查 Rider 的 'Copy to Output Directory' 设置。");
-                    return;
-                }
-
-                // 3. 读取并反序列化 [cite: 107]
-                string jsonContent = File.ReadAllText(jsonPath);
-                var sections = JsonSerializer.Deserialize<List<SteelSection>>(jsonContent);
-
-                if (sections != null)
-                {
-                    System.Console.WriteLine($"✅ 成功加载 {sections.Count} 条截面数据！\n");
-                    System.Console.WriteLine("------------------------------------------------------------");
-                    System.Console.WriteLine($"{"分类",-10} | {"型号",-15} | {"高度",-10} | {"惯性矩 Ix (mm⁴)",-20}");
-                    System.Console.WriteLine("------------------------------------------------------------");
-
-                    // 4. 输出前 5 条数据进行验证 
-                    foreach (var s in sections.Take(5))
-                    {
-                        // 使用标准格式化输出，确保数据对齐
-                        System.Console.WriteLine($"{s.Category,-10} | {s.Name,-15} | {s.H,8} | {s.Ix,18:N0}");
-                    }
-                    System.Console.WriteLine("------------------------------------------------------------");
-                }
-            }
-            catch (Exception ex)
-            {
-                // 记录错误但保证程序不直接崩溃 [cite: 133, 134]
-                System.Console.WriteLine($"❌ 测试运行中发生异常: {ex.Message}");
-            }
+            Console.WriteLine($"   > 原因: {res.Message} (允许值: {res.AllowedDeflection:F2}mm)");
         }
     }
 }
+catch (Exception ex)
+{
+    Console.ForegroundColor = ConsoleColor.Red;
+    Console.WriteLine($"\n[FATAL ERROR] 程序运行中断: {ex.Message}");
+    Console.WriteLine(ex.StackTrace);
+    Console.ResetColor();
+}
+
+Console.WriteLine("\n------------------------------------------");
+Console.WriteLine("测试结束，按任意键退出...");
+Console.ReadKey();

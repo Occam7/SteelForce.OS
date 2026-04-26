@@ -347,36 +347,41 @@ public class XbimParser : IIfcParser
     {
         try
         {
-            var allRels = element.ConnectedTo.Concat(element.ConnectedFrom);
-            var neighbors = allRels
-                .Select(rel => rel.RelatingElement == element ? rel.RelatedElement : rel.RelatingElement)
-                .Where(neighbor => neighbor != null)
-                .Select(neighbor => neighbor.GlobalId.ToString())
-                .Distinct();
-            int count = neighbors.Count();
+            // 1. 使用 EntityLabel 进行比较，这是最稳妥的 ID 匹配方式
+            var currentLabel = element.EntityLabel;
+        
+            // 2. 主动在全模型中搜索连接关系
+            var connectionRels = element.Model.Instances.OfType<IIfcRelConnectsElements>()
+                .Where(r => r.RelatingElement?.EntityLabel == currentLabel || 
+                            r.RelatedElement?.EntityLabel == currentLabel)
+                .ToList();
+
+            // 【关键调试信息】这行会在控制台打印，帮你确认代码是否更新
+            Console.WriteLine($"[DEBUG] 构件 {element.Name} (ID:#{currentLabel}) 搜索到连接数: {connectionRels.Count}");
+
+            var neighbors = connectionRels
+                .Select(rel => rel.RelatingElement?.EntityLabel == currentLabel ? rel.RelatedElement : rel.RelatingElement)
+                .Where(n => n != null)
+                .Select(n => n.GlobalId.ToString())
+                .Distinct()
+                .ToList();
+
+            int count = neighbors.Count;
             component.ConnectionCount = count;
+
             if (count == 1)
             {
                 component.Support = SupportCondition.Cantilever;
-            }
-            else if (count >= 2)
-            {
-                component.Support = SupportCondition.SimplySupported;
             }
             else
             {
                 component.Support = SupportCondition.SimplySupported;
             }
-
-            
         }
         catch (Exception e)
         {
-            Console.WriteLine($"[警告] 构件 {element.GlobalId} ({element.Name}) 连接关系解析失败。");
-            Console.WriteLine($"原因: {e.Message}");
-
+            Console.WriteLine($"[警告] 连接解析失败: {e.Message}");
             component.Support = SupportCondition.SimplySupported;
-            component.ConnectionCount = 0;
         }
     }
 
