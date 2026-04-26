@@ -11,4 +11,5 @@ public class ValidationResultDto
     public string Message { get; set; } = string.Empty;
     public string? ErrorReason { get; set; }
     public DateTime ValidationTimestamp { get; set; }
+    public string? AIAdvice { get; set; } // AI 修复建议
 }

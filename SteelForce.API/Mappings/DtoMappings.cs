@@ -19,7 +19,13 @@ public static class DtoMappings
             DesignLoad = component.DesignLoad,
             DeflectionLimitRatio = component.DeflectionLimitRatio,
             SectionType = component.SectionType,
-            LengthFromGeometry = component.LengthFromGeometry
+            
+            // --- 新增：工业级审计字段 ---
+            SupportCondition = component.Support.ToString(), // 将枚举转换为字符串传给前端
+            ConnectionCount = component.ConnectionCount,    // 连接数
+            LengthFromGeometry = component.LengthFromGeometry,
+            InertiaFromStandardLibrary = component.InertiaFromStandardLibrary, // 是否查了标准库
+            ElasticModulusFromMaterialLibrary = component.ElasticModulusFromMaterialLibrary // 是否查了材质库
         };
     }
 
@@ -37,7 +43,15 @@ public static class DtoMappings
             DesignLoad = dto.DesignLoad,
             DeflectionLimitRatio = dto.DeflectionLimitRatio,
             SectionType = dto.SectionType,
-            LengthFromGeometry = dto.LengthFromGeometry
+            
+            // --- 新增：反向映射 ---
+            // 将字符串解析回枚举，如果解析失败则默认简支梁
+            Support = Enum.TryParse<SupportCondition>(dto.SupportCondition, out var support) 
+                      ? support : SupportCondition.SimplySupported,
+            ConnectionCount = dto.ConnectionCount,
+            LengthFromGeometry = dto.LengthFromGeometry,
+            InertiaFromStandardLibrary = dto.InertiaFromStandardLibrary,
+            ElasticModulusFromMaterialLibrary = dto.ElasticModulusFromMaterialLibrary
         };
     }
 
@@ -53,6 +67,9 @@ public static class DtoMappings
             IsPassed = result.IsPassed,
             Message = result.Message,
             ErrorReason = result.ErrorReason,
+            
+            // --- 新增：AI 辅助审计字段 ---
+            AIAdvice = result.AIAdvice, // 将内核生成的建议传给前端
             ValidationTimestamp = result.ValidationTimestamp
         };
     }

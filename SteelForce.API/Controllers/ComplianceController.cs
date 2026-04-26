@@ -120,14 +120,20 @@ public class ComplianceController : ControllerBase
 
             _logger.LogInformation("开始解析并校验IFC文件: {FileName}", file.FileName);
             
+            // 1. 调用解析器
             var ifcParser = HttpContext.RequestServices.GetRequiredService<IIfcParser>();
             var components = ifcParser.Parse(tempFilePath).ToList();
             
             _logger.LogInformation("IFC文件解析完成，找到 {ComponentCount} 个构件，开始校验", components.Count);
             
+            // 2. 调用合规引擎进行批量计算
             var results = await _complianceEngine.ValidateBatchAsync(
                 components,
                 maxDegreeOfParallelism);
+            
+            // 3. 统计审计关键指标 (基于最新内核能力)
+            var cantileverCount = components.Count(c => c.Support == SupportCondition.Cantilever);
+            var libCount = components.Count(c => c.InertiaFromStandardLibrary || c.ElasticModulusFromMaterialLibrary);
             
             var componentDtos = components.Select(c => c.ToDto()).ToList();
             var resultDtos = results.Select(r => r.ToDto()).ToList();
@@ -135,9 +141,12 @@ public class ComplianceController : ControllerBase
             var passedCount = resultDtos.Count(r => r.IsPassed);
             var failedCount = resultDtos.Count - passedCount;
             
+            var auditSummary = $"工业审计完成。自动识别出 {cantileverCount} 根悬臂构件并切换计算公式；" +
+                              $"通过标准库自动修复了 {libCount} 根构件的数据缺失问题。";
+
             _logger.LogInformation(
-                "解析并校验完成: 总计 {Total}, 通过 {Passed}, 失败 {Failed}", 
-                resultDtos.Count, passedCount, failedCount);
+                "解析并校验完成: 总计 {Total}, 通过 {Passed}, 悬臂 {Cantilever}, 自动修复 {Lib}", 
+                resultDtos.Count, passedCount, cantileverCount, libCount);
 
             var response = new ParseAndValidateResponseDto
             {
@@ -145,12 +154,15 @@ public class ComplianceController : ControllerBase
                 ValidationResults = resultDtos,
                 TotalCount = resultDtos.Count,
                 PassedCount = passedCount,
-                FailedCount = failedCount
+                FailedCount = failedCount,
+                CantileverCount = cantileverCount,
+                LibrarySupplementCount = libCount,
+                AuditSummary = auditSummary
             };
 
             return Ok(ApiResponse<ParseAndValidateResponseDto>.Ok(
                 response,
-                $"解析并校验完成: 总计 {resultDtos.Count}, 通过 {passedCount}, 失败 {failedCount}"));
+                auditSummary));
         }
         catch (FileNotFoundException ex)
         {
@@ -172,6 +184,9 @@ public class ComplianceController : ControllerBase
     }
 }
 
+/// <summary>
+/// 解析并校验响应 DTO
+/// </summary>
 public class ParseAndValidateResponseDto
 {
     public List<BimComponentDto> Components { get; set; } = new();
@@ -179,4 +194,19 @@ public class ParseAndValidateResponseDto
     public int TotalCount { get; set; }
     public int PassedCount { get; set; }
     public int FailedCount { get; set; }
+
+    /// <summary>
+    /// 自动识别出的悬臂梁数量
+    /// </summary>
+    public int CantileverCount { get; set; }
+
+    /// <summary>
+    /// 通过标准库补充参数的构件数量
+    /// </summary>
+    public int LibrarySupplementCount { get; set; }
+
+    /// <summary>
+    /// 本次解析的审计简报
+    /// </summary>
+    public string AuditSummary { get; set; } = string.Empty;
 }

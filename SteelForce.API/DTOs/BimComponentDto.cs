@@ -12,5 +12,13 @@ public class BimComponentDto
     public double DesignLoad { get; set; }
     public double DeflectionLimitRatio { get; set; }
     public string? SectionType { get; set; }
+    
+    // 新增：物理姿态与连接信息
+    public string SupportCondition { get; set; } = string.Empty; // 简支、悬臂等
+    public int ConnectionCount { get; set; }
+
+    // 新增：数据来源审计标志位
     public bool LengthFromGeometry { get; set; }
+    public bool InertiaFromStandardLibrary { get; set; }
+    public bool ElasticModulusFromMaterialLibrary { get; set; }
 }
